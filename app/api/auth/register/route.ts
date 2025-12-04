@@ -1,56 +1,48 @@
-import { NextRequest,NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import User from "@/models/userModel";
 import { connectDB } from "@/lib/mongoConnect";
 
+export async function POST(req: NextRequest) {
+  try {
+    await connectDB();
 
+    const form = await req.formData();
 
-export  async function POST(req:Request,res:Response) {
-    // console.log("reachedd");
-    // const {name,email,password} =await req.json();
-    //     console.log(name,email,password);
+    const name = form.get("name") as string;
+    const email = form.get("email") as string;
+    const password = form.get("password") as string;
 
-    try{
-      
-        
-        await connectDB()
-
-        
-     
-        
-        const {name,email,password} =await req.json();
-        console.log(name,email,password);
-        
-
-        const existingUser = await User.findOne({email})
-        if (existingUser){
-            return NextResponse.json({error:"User already exists"},{status:400})
-        }
-
-        const hashed = await bcrypt.hash(password, 10);
-        if(!existingUser){
-
-            const user = await User.create({
-                name,
-                email,
-                password:hashed
-            })
-            return NextResponse.json(
-                {message:"Registration Compeleted",
-                    user:{
-                        id:user._id,
-                        name:user.name,
-                        email:user.email
-                    },
-                }
-            )
-        }
+    if (!name || !email || !password) {
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
-    catch(error){
-        console.log(error);
-        
-       return NextResponse.json({error:"Registration Failed"})
-        
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json({ error: "User already exists" }, { status: 400 });
     }
-    
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    return NextResponse.json(
+      {
+        message: "Registration successful",
+        user: {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+        },
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Registration Error:", error);
+    return NextResponse.json({ error: "Registration failed" }, { status: 500 });
+  }
 }
