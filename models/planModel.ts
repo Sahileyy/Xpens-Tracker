@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, models } from "mongoose";
 
 export interface IPlan extends Document {
+  userId: mongoose.Types.ObjectId;   
   salary: number;
   month: string;
   savings: number;
@@ -14,6 +15,12 @@ export interface IPlan extends Document {
 
 const PlanSchema = new Schema<IPlan>(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,               
+    },
+
     salary: { type: Number, required: true },
     month: { type: String, required: true },
     savings: { type: Number, required: true },

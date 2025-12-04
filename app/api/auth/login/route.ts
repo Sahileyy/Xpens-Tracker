@@ -34,13 +34,20 @@ export async function POST(req: NextRequest) {
     }
 
     const token = generateToken(user._id.toString());
-
+    
     const res = NextResponse.json(
-      { message: "Login successful" },
-      { status: 200 }
+      { message: "Login successful",id:user._id },
+      { status: 200 },
     );
 
     res.cookies.set("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: false,
+      maxAge: 7 * 24 * 60 * 60,
+      path: "/",
+    });
+        res.cookies.set("user_id", user._id.toString(), {
       httpOnly: true,
       sameSite: "strict",
       secure: false,
