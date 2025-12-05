@@ -104,7 +104,7 @@ export default function CreatePlanPage() {
             </div>
           </div>
 
-          {/* Submit Button */}
+        
           <button
             type="submit"
             className="w-full bg-indigo-600 py-3 text-white font-semibold rounded-lg

@@ -45,7 +45,7 @@ export default function LoginPage() {
       router.replace(`/expense/${id}`)
       router.refresh()
      
-      // window.location.href = `/expense/${id}`;
+     
     } catch (err) {
       console.error(err);
       setError("Something went wrong");

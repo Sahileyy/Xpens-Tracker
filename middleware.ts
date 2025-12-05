@@ -7,25 +7,25 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value || null;
   const path = req.nextUrl.pathname;
 
-  // All protected routes
+ 
   const isProtected =
     path.startsWith("/expense") ||
     path.startsWith("/api/plan");
 
 console.log("MIDDLEWARE TOKEN RAW:", token);
 
-  // If NOT protected → allow
+
   if (!isProtected) {
     return NextResponse.next();
   }
 
-  // If PROTECTED but NO TOKEN → block
+ 
   if (!token) {
     console.log("NO TOKEN → redirect to /login");
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // Validate JWT
+ 
   try {
     jwt.verify(token, process.env.JWT_SECRET as string);
 

@@ -14,8 +14,8 @@ export default async function PlanDetailsPage({ params }: { params: { id: string
   const safePlan = JSON.parse(JSON.stringify(plan));
 
   return (
-    <div className="p-10 ml-0 lg:ml-64">
-      <h1 className="text-3xl font-bold mb-6">{safePlan.month} Plan</h1>
+    <div className="p-10 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+      <h1 className="text-3xl font-bold mb-6 text-black">{safePlan.month} Plan</h1>
 
     
       <PlanDetails plan={safePlan} />
