@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-50 via-indigo-100 to-blue-200 flex items-center justify-center p-6">
 
-      {/* ✨ Floating background blobs */}
+      
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 0.5, scale: 1.2 }}
@@ -35,7 +35,7 @@ export default function HomePage() {
         className="absolute bottom-10 right-10 w-[22rem] h-[22rem] bg-indigo-300 rounded-full blur-3xl opacity-40"
       />
 
-      {/* ✨ Sparkle cluster */}
+     
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
@@ -47,17 +47,16 @@ export default function HomePage() {
         <div className="absolute bottom-20 left-1/4 w-2 h-2 bg-purple-200 rounded-full blur-[1px] animate-ping" />
       </motion.div>
 
-      {/* CARD */}
+     
       <motion.div
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
         className="relative bg-white/60 backdrop-blur-2xl shadow-2xl border border-white/50 rounded-3xl p-12 max-w-3xl text-center"
       >
-        {/* Decorative glow behind card */}
+        
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-200/30 to-purple-100/20 blur-xl -z-10" />
 
-        {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,7 +93,7 @@ export default function HomePage() {
           <span className="font-bold text-indigo-600"> effortlessly.</span>
         </motion.p>
 
-        {/* Buttons */}
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -108,12 +107,11 @@ export default function HomePage() {
             Create Your Account
           </Link>
 
-          {/* EXPLORE BUTTON */}
           <button
             onClick={handleExplore}
             className="px-8 py-3 rounded-xl bg-white border-2 border-indigo-600 text-indigo-700 font-semibold shadow-xl hover:bg-indigo-50 hover:shadow-2xl transition-all transform hover:-translate-y-1 active:scale-95 relative overflow-hidden"
           >
-            {/* glow effect */}
+           
             <span className="absolute inset-0 bg-gradient-to-r from-indigo-100 to-purple-100 opacity-0 hover:opacity-80 transition-all duration-500 blur-2xl"></span>
             <span className="relative">
               {loading ? "Checking..." : "Explore Expenses"}
