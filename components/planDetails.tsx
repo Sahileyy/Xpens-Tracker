@@ -1,117 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-
-// export default function PlanDetails({ plan }: { plan: any }) {
-//   const [isEditing, setIsEditing] = useState(false);
-
-//   const [form, setForm] = useState({
-//     allowanceTravel: String(plan.allowanceTravel ?? ""),
-//     allowanceBills: String(plan.allowanceBills ?? ""),
-//     allowanceGrocery: String(plan.allowanceGrocery ?? ""),
-//     allowanceShopping: String(plan.allowanceShopping ?? ""),
-//   });
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     console.log("Typing:", e.target.name, e.target.value);
-//     setForm((prev) => ({
-//       ...prev,
-//       [e.target.name]: e.target.value,
-//     }));
-//   };
-
-//   const handleSave = async () => {
-//     console.log("Saving form:", form);
-//     console.log(plan._id);
-    
-//     const res = await fetch(`/api/plan/${plan._id}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({
-//         allowanceTravel: Number(form.allowanceTravel),
-//         allowanceBills: Number(form.allowanceBills),
-//         allowanceGrocery: Number(form.allowanceGrocery),
-//         allowanceShopping: Number(form.allowanceShopping),
-//       }),
-//     });
-//     console.log(res)
-//     if (!res.ok) {
-//       alert("Update failed!");
-//       return;
-//     }
-
-//     alert("Plan updated!");
-//     setIsEditing(false);
-//   };
-
-//   return (
-//     <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl space-y-6">
-//       {/* SALARY / SAVINGS VIEW */}
-//       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-//         <div className="bg-indigo-50 p-5 rounded-xl border border-indigo-200 shadow-sm">
-//           <h3 className="text-lg font-semibold text-indigo-900">Salary</h3>
-//           <p className="text-3xl font-bold text-black mt-2">₹{plan.salary}</p>
-//         </div>
-
-//         <div className="bg-green-50 p-5 rounded-xl border border-green-200 shadow-sm">
-//           <h3 className="text-lg font-semibold text-green-900">Savings Goal</h3>
-//           <p className="text-3xl font-bold text-black mt-2">₹{plan.savings}</p>
-//         </div>
-//       </div>
-
-//       <hr />
-
-//       <h3 className="text-xl font-semibold text-cyan-900">
-//         Daily Editable Fields
-//       </h3>
-
-//       {/* FORM FIELDS */}
-//       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-//         {Object.entries(form).map(([key, value]) => (
-//           <div key={key}>
-//             <label className="font-semibold text-gray-700">
-//               {key.replace("allowance", "")}
-//             </label>
-//             <input
-//               name={key}
-//               type="number"
-//               value={value}
-//               onChange={handleChange}
-//               disabled={!isEditing}
-//               className={`w-full p-3 text-black border rounded-lg 
-//                 ${
-//                   isEditing
-//                     ? "bg-white border-gray-400"
-//                     : "bg-gray-200 border-gray-300 cursor-not-allowed"
-//                 }`}
-//             />
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* BUTTONS */}
-//       {!isEditing ? (
-//         <button
-//           onClick={() => {
-//             console.log("Editing enabled");
-//             setIsEditing(true);
-//           }}
-//           className="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-//         >
-//           Edit Plan
-//         </button>
-//       ) : (
-//         <button
-//           onClick={handleSave}
-//           className="w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-//         >
-//           Save Changes
-//         </button>
-//       )}
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
@@ -121,121 +7,209 @@ export default function PlanDetails({ plan }: { plan: any }) {
   const [isEditing, setIsEditing] = useState(false);
 
   const [form, setForm] = useState({
-    allowanceTravel: String(plan.allowanceTravel ?? ""),
-    allowanceBills: String(plan.allowanceBills ?? ""),
-    allowanceGrocery: String(plan.allowanceGrocery ?? ""),
-    allowanceShopping: String(plan.allowanceShopping ?? ""),
+    allowanceTravel: plan.allowanceTravel,
+    allowanceBills: plan.allowanceBills,
+    allowanceGrocery: plan.allowanceGrocery,
+    allowanceShopping: plan.allowanceShopping,
   });
-  
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [expense, setExpense] = useState({
+    travel: "",
+    bills: "",
+    grocery: "",
+    shopping: "",
+  });
+
+  type ExpenseKey = "travel" | "bills" | "grocery" | "shopping";
+
+  type AllowanceKey =
+    | "allowanceTravel"
+    | "allowanceBills"
+    | "allowanceGrocery"
+    | "allowanceShopping";
+
+  const keyMap: Record<ExpenseKey, AllowanceKey> = {
+    travel: "allowanceTravel",
+    bills: "allowanceBills",
+    grocery: "allowanceGrocery",
+    shopping: "allowanceShopping",
+  };
+
+  const handleExpenseAdd = (key: ExpenseKey) => {
+    const spent = Number(expense[key]);
+    if (!spent || spent <= 0) return alert("Enter valid number!");
+    const allowanceKey = keyMap[key];
+
+    if (spent > form[allowanceKey]) return alert("Not enough balance!");
+
     setForm((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [allowanceKey]: prev[allowanceKey] - spent,
+    }));
+
+    setExpense((prev) => ({
+      ...prev,
+      [key]: "",
     }));
   };
 
   const handleSave = async () => {
-
     const res = await fetch(`/api/plan/${plan._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        allowanceTravel: Number(form.allowanceTravel),
-        allowanceBills: Number(form.allowanceBills),
-        allowanceGrocery: Number(form.allowanceGrocery),
-        allowanceShopping: Number(form.allowanceShopping),
-      }),
-    
+      body: JSON.stringify(form),
     });
-    
-    
-    if (!res.ok) {
-      alert("Update failed!");
-      return;
-    }
 
-
+    if (!res.ok) return alert("Update failed!");
     alert("Plan updated!");
     setIsEditing(false);
   };
 
   return (
-    <div className="relative  w-full min-h-screen">
+    <div className="relative w-full min-h-screen bg-gray-100 p-6">
 
-     
-      <div className="absolute min-h-screen w-full bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100" />
+      {/* TOP NAV */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">{plan.month} Plan</h2>
 
-     
-        <div className="absolute top-0 right-1">
-          <Link
-            href="/"
-            className="px-5 py-2 font-medium rounded-xl bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 transition-all"
-          >
-             Home
-          </Link>
-        </div>
-      <div className="relative bg-white/80 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl p-8 max-w-4xl mx-auto space-y-6">
+        <Link
+          href="/"
+          className="px-5 py-2 rounded-xl bg-gray-900 text-white shadow hover:bg-black transition"
+        >
+          Home
+        </Link>
+      </div>
 
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="bg-indigo-100 p-6 rounded-xl border border-indigo-200 shadow-sm">
-            <h3 className="text-lg font-semibold text-indigo-900">Salary</h3>
-            <p className="text-3xl font-bold text-black mt-2">₹{plan.salary}</p>
+      {/* CARD WRAPPER */}
+      <div className="bg-white rounded-3xl shadow-lg p-6 space-y-8">
+
+        {/* Salary + Savings */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-gray-50 p-5 rounded-2xl shadow-sm text-center">
+            <p className="text-gray-500 text-sm">Salary</p>
+            <p className="text-4xl font-bold text-gray-900">₹{plan.salary}</p>
           </div>
 
-          <div className="bg-green-100 p-6 rounded-xl border border-green-200 shadow-sm">
-            <h3 className="text-lg font-semibold text-green-900">Savings Goal</h3>
-            <p className="text-3xl font-bold text-black mt-2">₹{plan.savings}</p>
+          <div className="bg-gray-50 p-5 rounded-2xl shadow-sm text-center">
+            <p className="text-gray-500 text-sm">Savings Goal</p>
+            <p className="text-4xl font-bold text-gray-900">₹{plan.savings}</p>
           </div>
         </div>
 
-        <hr className="border-gray-300" />
+        <div className="border-t border-gray-200" />
 
-        <h3 className="text-xl font-semibold text-indigo-900">
-          Daily Editable Fields
+        {/* Section Title */}
+        <h3 className="text-xl font-semibold text-gray-800">
+          Remaining Allowances
         </h3>
 
-     
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {Object.entries(form).map(([key, value]) => (
-            <div key={key}>
-              <label className="font-semibold text-gray-700 block mb-1">
-                {key.replace("allowance", "")}
-              </label>
+        {/* GRID OF 4 ITEMS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          {/* CARD TEMPLATE (TRAVEL) */}
+          <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
+            <p className="font-medium text-gray-700">Travel</p>
+            <p className="text-3xl font-bold text-gray-900">{form.allowanceTravel}</p>
+
+            <div className="flex gap-2">
               <input
-                name={key}
                 type="number"
-                value={value}
-                onChange={handleChange}
-                disabled={!isEditing}
-                className={`w-full p-3 text-black rounded-lg shadow-sm transition
-                  ${
-                    isEditing
-                      ? "bg-white border border-gray-400"
-                      : "bg-gray-200 border border-gray-300 cursor-not-allowed"
-                  }`}
+                value={expense.travel}
+                placeholder="Spent"
+                className="flex-1 p-2 rounded-xl border text-black shadow-sm bg-white"
+                onChange={(e) =>
+                  setExpense((prev) => ({ ...prev, travel: e.target.value }))
+                }
               />
+              <button
+                onClick={() => handleExpenseAdd("travel")}
+                className="px-4 py-2 bg-gray-900 text-white rounded-xl shadow hover:bg-black"
+              >
+                Add
+              </button>
             </div>
-          ))}
+          </div>
+
+          {/* BILLS CARD */}
+          <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
+            <p className="font-medium text-gray-700">Bills</p>
+            <p className="text-3xl font-bold text-gray-900">{form.allowanceBills}</p>
+
+            <div className="flex gap-2">
+              <input
+                type="number"
+                value={expense.bills}
+                placeholder="Spent"
+                className="flex-1 p-2 rounded-xl border text-black shadow-sm bg-white"
+                onChange={(e) =>
+                  setExpense((prev) => ({ ...prev, bills: e.target.value }))
+                }
+              />
+              <button
+                onClick={() => handleExpenseAdd("bills")}
+                className="px-4 py-2 bg-gray-900 text-white rounded-xl shadow hover:bg-black"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+
+          {/* GROCERY */}
+          <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
+            <p className="font-medium text-gray-700">Grocery</p>
+            <p className="text-3xl font-bold text-gray-900">{form.allowanceGrocery}</p>
+
+            <div className="flex gap-2">
+              <input
+                type="number"
+                value={expense.grocery}
+                placeholder="Spent"
+                className="flex-1 p-2 rounded-xl border shadow-sm bg-white text-black"
+                onChange={(e) =>
+                  setExpense((prev) => ({ ...prev, grocery: e.target.value }))
+                }
+              />
+              <button
+                onClick={() => handleExpenseAdd("grocery")}
+                className="px-4 py-2 bg-gray-900 text-white rounded-xl shadow hover:bg-black"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+
+          {/* SHOPPING */}
+          <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
+            <p className="font-medium text-gray-700">Shopping</p>
+            <p className="text-3xl font-bold text-gray-900">{form.allowanceShopping}</p>
+
+            <div className="flex gap-2">
+              <input
+                type="number"
+                value={expense.shopping}
+                placeholder="Spent"
+                className="flex-1 p-2 rounded-xl border text-black shadow-sm bg-white"
+                onChange={(e) =>
+                  setExpense((prev) => ({ ...prev, shopping: e.target.value }))
+                }
+              />
+              <button
+                onClick={() => handleExpenseAdd("shopping")}
+                className="px-4 py-2 bg-gray-900 text-white rounded-xl shadow hover:bg-black"
+              >
+                Add
+              </button>
+            </div>
+          </div>
         </div>
 
-      
-        {!isEditing ? (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="w-full py-3 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-all shadow-md"
-          >
-            Edit Plan
-          </button>
-        ) : (
-          <button
-            onClick={handleSave}
-            className="w-full py-3 bg-green-600 text-white rounded-lg text-lg font-medium hover:bg-green-700 transition-all shadow-md"
-          >
-            Save Changes
-          </button>
-        )}
+        {/* SAVE BUTTON */}
+        <button
+          onClick={handleSave}
+          className="w-full py-3 bg-gray-900 text-white text-lg font-semibold rounded-2xl shadow hover:bg-black"
+        >
+          Save Changes
+        </button>
       </div>
     </div>
   );

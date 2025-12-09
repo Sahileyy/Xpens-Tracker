@@ -18,106 +18,46 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-50 via-indigo-100 to-blue-200 flex items-center justify-center p-6">
+    <div className="relative min-h-screen bg-[#EDEDED] flex items-center justify-center p-6">
 
-      
+      {/* MAIN CARD – iOS style */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 0.5, scale: 1.2 }}
-        transition={{ duration: 6, repeat: Infinity, repeatType: "mirror" }}
-        className="absolute top-10 left-5 w-[18rem] h-[18rem] bg-purple-300 rounded-full blur-3xl opacity-40"
-      />
-
-      <motion.div
-        initial={{ opacity: 0.2, scale: 1 }}
-        animate={{ opacity: 0.5, scale: 1.3 }}
-        transition={{ duration: 7, repeat: Infinity, repeatType: "mirror" }}
-        className="absolute bottom-10 right-10 w-[22rem] h-[22rem] bg-indigo-300 rounded-full blur-3xl opacity-40"
-      />
-
-     
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        transition={{ duration: 2 }}
-        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="bg-white shadow-xl rounded-[32px] p-10 max-w-xl w-full border border-gray-200"
       >
-        <div className="absolute top-16 left-1/3 w-2 h-2 bg-white rounded-full opacity-70 blur-[2px] animate-ping" />
-        <div className="absolute top-28 right-1/4 w-3 h-3 bg-indigo-200 rounded-full blur-[1px] animate-pulse" />
-        <div className="absolute bottom-20 left-1/4 w-2 h-2 bg-purple-200 rounded-full blur-[1px] animate-ping" />
-      </motion.div>
 
-     
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        className="relative bg-white/60 backdrop-blur-2xl shadow-2xl border border-white/50 rounded-3xl p-12 max-w-3xl text-center"
-      >
-        
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-200/30 to-purple-100/20 blur-xl -z-10" />
-
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight"
-        >
-          💸 Plan Better.  
+        {/* HEADLINE */}
+        <h1 className="text-4xl font-semibold text-gray-900 text-center">
+          Plan Better,
           <br />
-          <span className="text-indigo-600">Spend Smarter.</span>
-        </motion.h1>
+          <span className="font-bold">Spend Smarter</span>
+        </h1>
 
-        {/* Dialogues */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-gray-700 text-xl leading-relaxed mb-6"
-        >
-          “Your money deserves a strategy.”  
-          <br />
-          “Let every rupee have a purpose.”  
-          <br />
-          “Small changes today → Big savings tomorrow.”
-        </motion.p>
+        {/* SUBTEXT */}
+        <p className="text-center text-gray-600 mt-3">
+          Track your expenses in a clean, simple interface.
+        </p>
 
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
-          className="text-gray-800 font-medium mb-10 text-lg"
-        >
-          Create, track, and improve your spending —  
-          <span className="font-bold text-indigo-600"> effortlessly.</span>
-        </motion.p>
+        {/* BUTTONS ONLY (NO CARDS) */}
+        <div className="mt-10 flex flex-col gap-4">
 
-        
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, duration: 0.7 }}
-          className="flex flex-col md:flex-row gap-5 justify-center"
-        >
           <Link
             href="/register"
-            className="px-8 py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-xl hover:bg-indigo-700 hover:shadow-2xl transition-all transform hover:-translate-y-1 active:scale-95"
+            className="w-full py-3 text-center bg-black text-white rounded-xl font-medium shadow-md"
           >
-            Create Your Account
+            Create Account
           </Link>
 
           <button
             onClick={handleExplore}
-            className="px-8 py-3 rounded-xl bg-white border-2 border-indigo-600 text-indigo-700 font-semibold shadow-xl hover:bg-indigo-50 hover:shadow-2xl transition-all transform hover:-translate-y-1 active:scale-95 relative overflow-hidden"
+            className="w-full py-3 text-center bg-gray-200 text-gray-800 rounded-xl font-medium border border-gray-300 shadow-sm"
           >
-           
-            <span className="absolute inset-0 bg-gradient-to-r from-indigo-100 to-purple-100 opacity-0 hover:opacity-80 transition-all duration-500 blur-2xl"></span>
-            <span className="relative">
-              {loading ? "Checking..." : "Explore Expenses"}
-            </span>
+            {loading ? "Checking..." : "Explore Expenses"}
           </button>
-        </motion.div>
+
+        </div>
       </motion.div>
     </div>
   );

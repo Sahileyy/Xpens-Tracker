@@ -10,32 +10,41 @@ export default function ExpensePage() {
 
       <div className="ml-64 w-full">
 
-      
-        <nav className="fixed top-0 left-64 right-0 h-16 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200 flex items-center justify-between px-6 z-30">
-          
-
+        {/* TOP NAV */}
+        <nav
+          className="fixed top-0 left-64 right-0 h-16 
+          bg-white/80 backdrop-blur-lg shadow-md border-b border-gray-200
+          flex items-center justify-between px-6 z-30"
+        >
           <div className="flex justify-end w-full">
             <LogoutButton />
           </div>
         </nav>
 
-       
-        <div className="p-8 mt-20 flex flex-col items-center justify-center text-center">
+        {/* MAIN CONTENT */}
+        <div className="p-8 mt-24 flex flex-col items-center justify-center text-center">
 
+          {/* Add Plan Button */}
           <Link
             href="/expense/create"
-            className="bg-indigo-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition-all"
+            className="bg-gray-900 text-white px-6 py-3 rounded-xl shadow 
+            hover:bg-gray-800 transition-all text-md font-semibold"
           >
-            ADD PLAN
+            Add Plan
           </Link>
 
-          <h1 className="text-3xl mt-6 text-gray-700 font-extrabold">
+          {/* Title */}
+          <h1 className="text-4xl mt-8 font-extrabold text-gray-900 tracking-tight">
             Xpens Tracker
           </h1>
 
-          <p className="text-gray-600 mt-2">
-            Make your own Xpens.
+          {/* Subtitle */}
+          <p className="text-gray-600 mt-3 text-lg">
+            Track your financial journey with ease.
           </p>
+
+          {/* Separator */}
+          <div className="mt-6 w-16 h-1 bg-gray-700 rounded-full"></div>
 
         </div>
       </div>

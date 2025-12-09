@@ -21,7 +21,7 @@ console.log("MIDDLEWARE TOKEN RAW:", token);
 
  
   if (!token) {
-    console.log("NO TOKEN → redirect to /login");
+    console.log("NO TOKEN  redirect to /login");
     return NextResponse.redirect(new URL("/login", req.url));
   }
 

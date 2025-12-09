@@ -40,72 +40,93 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200 p-2">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#f2f2f2] p-4">
 
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 border border-gray-200">
+
+        {/* LOGO */}
         <div className="flex justify-center mb-4">
-          <Image src={Xpenlogo} alt="logo" className="w-20 h-20" />
+          <Image src={Xpenlogo} alt="logo" className="w-20 h-20 grayscale" />
         </div>
 
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-3">
+        {/* TITLE */}
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2 tracking-tight">
           xpens Tracker
         </h1>
 
-        <p className="text-gray-600 text-center mb-6">
+        <p className="text-gray-600 text-center mb-6 text-sm">
           Create your account to Keep a Track
         </p>
 
-        {error && <div className="bg-red-100 text-red-600 p-3 rounded-lg mb-4">{error}</div>}
-        {success && <div className="bg-green-100 text-green-600 p-3 rounded-lg mb-4">{success}</div>}
+        {/* ERROR + SUCCESS */}
+        {error && (
+          <div className="bg-gray-200 text-gray-700 p-3 rounded-lg mb-4 border border-gray-300">
+            {error}
+          </div>
+        )}
 
+        {success && (
+          <div className="bg-gray-100 text-gray-700 p-3 rounded-lg mb-4 border border-gray-300">
+            {success}
+          </div>
+        )}
+
+        {/* FORM */}
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <label className="text-gray-700 font-medium">Full Name</label>
+            <label className="text-gray-700 font-medium text-sm">Full Name</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg text-black"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-xl bg-gray-100 text-black focus:outline-none"
               placeholder="username"
             />
           </div>
 
           <div>
-            <label className="text-gray-700 font-medium">Email</label>
+            <label className="text-gray-700 font-medium text-sm">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg text-black"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-xl bg-gray-100 text-black focus:outline-none"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label className="text-gray-700 font-medium">Password</label>
+            <label className="text-gray-700 font-medium text-sm">Password</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg text-black"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-xl bg-gray-100 text-black focus:outline-none"
               placeholder="••••••••"
             />
           </div>
 
+          {/* BUTTON */}
           <button
             type="submit"
-            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700"
+            className="w-full py-3 rounded-xl bg-gray-900 text-white font-semibold shadow hover:bg-black transition-all"
           >
             Register
           </button>
         </form>
 
-        <p className="mt-6 text-center text-gray-600">
+        {/* LOGIN LINK */}
+        <p className="mt-6 text-center text-gray-600 text-sm">
           Already have an account?{" "}
-          <a href="/login" className="text-indigo-600 font-semibold hover:underline">Login</a>
+          <a
+            href="/login"
+            className="text-gray-900 font-semibold underline underline-offset-2"
+          >
+            Login
+          </a>
         </p>
       </div>
     </div>
