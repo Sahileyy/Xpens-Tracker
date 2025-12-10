@@ -10,7 +10,7 @@ export default function ExpensePage() {
 
       <div className="ml-64 w-full">
 
-        {/* TOP NAV */}
+       
         <nav
           className="fixed top-0 left-64 right-0 h-16 
           bg-white/80 backdrop-blur-lg shadow-md border-b border-gray-200
@@ -21,10 +21,10 @@ export default function ExpensePage() {
           </div>
         </nav>
 
-        {/* MAIN CONTENT */}
+        
         <div className="p-8 mt-24 flex flex-col items-center justify-center text-center">
 
-          {/* Add Plan Button */}
+          
           <Link
             href="/expense/create"
             className="bg-gray-900 text-white px-6 py-3 rounded-xl shadow 
@@ -33,17 +33,16 @@ export default function ExpensePage() {
             Add Plan
           </Link>
 
-          {/* Title */}
           <h1 className="text-4xl mt-8 font-extrabold text-gray-900 tracking-tight">
             Xpens Tracker
           </h1>
 
-          {/* Subtitle */}
+          
           <p className="text-gray-600 mt-3 text-lg">
             Track your financial journey with ease.
           </p>
 
-          {/* Separator */}
+        
           <div className="mt-6 w-16 h-1 bg-gray-700 rounded-full"></div>
 
         </div>

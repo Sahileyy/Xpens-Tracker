@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen bg-[#EDEDED] flex items-center justify-center p-6">
 
-      {/* MAIN CARD – iOS style */}
+     
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -28,19 +28,18 @@ export default function HomePage() {
         className="bg-white shadow-xl rounded-[32px] p-10 max-w-xl w-full border border-gray-200"
       >
 
-        {/* HEADLINE */}
+        
         <h1 className="text-4xl font-semibold text-gray-900 text-center">
           Plan Better,
           <br />
           <span className="font-bold">Spend Smarter</span>
         </h1>
 
-        {/* SUBTEXT */}
         <p className="text-center text-gray-600 mt-3">
           Track your expenses in a clean, simple interface.
         </p>
 
-        {/* BUTTONS ONLY (NO CARDS) */}
+        
         <div className="mt-10 flex flex-col gap-4">
 
           <Link

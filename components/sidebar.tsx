@@ -15,7 +15,7 @@ export default async function Sidebar() {
   return (
     <div className="w-64 h-screen fixed z-10 bg-white/80 backdrop-blur-lg border-r border-white/40 shadow-xl flex flex-col">
 
-      {/* HEADER WITH LOGO */}
+      
       <div className="p-3 border-b border-white/40 bg-white/70 backdrop-blur-xl shadow-md flex items-center gap-3">
         <Image 
           src={Xpenlogo} 
@@ -27,7 +27,7 @@ export default async function Sidebar() {
         </span>
       </div>
 
-      {/* CREATE BUTTON */}
+     
       <div className="p-4 border-b border-gray-200">
         <Link
           href="/expense/create"
@@ -37,7 +37,7 @@ export default async function Sidebar() {
         </Link>
       </div>
 
-      {/* PLANS LIST */}
+      
       <div className="p-4 overflow-auto flex-1">
         <p className="text-gray-500 text-xs mb-3 tracking-wider font-medium">
           YOUR PLANS
@@ -49,7 +49,7 @@ export default async function Sidebar() {
               key={plan._id}
               className="relative group flex items-center justify-between bg-white/60 backdrop-blur-sm p-2 rounded-lg shadow-sm hover:shadow-md transition"
             >
-              {/* PLAN LINK */}
+             
               <Link
                 href={`/expense/plan/${plan._id}`}
                 className="block px-3 py-2 rounded font-semibold text-gray-900 hover:text-gray-700 transition flex-1 text-lg"
@@ -57,10 +57,10 @@ export default async function Sidebar() {
                 {plan.month}
               </Link>
 
-              {/* DELETE BUTTON */}
+              
               <DeleteButton id={plan._id.toString()} />
 
-              {/* TOOLTIP */}
+              
               <div className="hidden group-hover:block absolute left-60 top-0 bg-white/90 backdrop-blur-md shadow-xl p-4 rounded-xl border border-gray-200 min-w-[220px] text-sm z-20">
                 <p><b>Salary:</b> ₹{plan.salary}</p>
                 <p><b>Savings Goal:</b> ₹{plan.savings}</p>

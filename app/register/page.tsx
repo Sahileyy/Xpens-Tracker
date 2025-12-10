@@ -44,12 +44,12 @@ export default function RegisterPage() {
 
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 border border-gray-200">
 
-        {/* LOGO */}
+       
         <div className="flex justify-center mb-4">
           <Image src={Xpenlogo} alt="logo" className="w-20 h-20 grayscale" />
         </div>
 
-        {/* TITLE */}
+       
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-2 tracking-tight">
           xpens Tracker
         </h1>
@@ -58,7 +58,7 @@ export default function RegisterPage() {
           Create your account to Keep a Track
         </p>
 
-        {/* ERROR + SUCCESS */}
+       
         {error && (
           <div className="bg-gray-200 text-gray-700 p-3 rounded-lg mb-4 border border-gray-300">
             {error}
@@ -109,7 +109,7 @@ export default function RegisterPage() {
             />
           </div>
 
-          {/* BUTTON */}
+          
           <button
             type="submit"
             className="w-full py-3 rounded-xl bg-gray-900 text-white font-semibold shadow hover:bg-black transition-all"
@@ -118,7 +118,7 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        {/* LOGIN LINK */}
+        
         <p className="mt-6 text-center text-gray-600 text-sm">
           Already have an account?{" "}
           <a

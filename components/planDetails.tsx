@@ -68,7 +68,7 @@ export default function PlanDetails({ plan }: { plan: any }) {
   return (
     <div className="relative w-full min-h-screen bg-gray-100 p-6">
 
-      {/* TOP NAV */}
+      
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">{plan.month} Plan</h2>
 
@@ -80,10 +80,10 @@ export default function PlanDetails({ plan }: { plan: any }) {
         </Link>
       </div>
 
-      {/* CARD WRAPPER */}
+      
       <div className="bg-white rounded-3xl shadow-lg p-6 space-y-8">
 
-        {/* Salary + Savings */}
+        
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-gray-50 p-5 rounded-2xl shadow-sm text-center">
             <p className="text-gray-500 text-sm">Salary</p>
@@ -98,15 +98,15 @@ export default function PlanDetails({ plan }: { plan: any }) {
 
         <div className="border-t border-gray-200" />
 
-        {/* Section Title */}
+       
         <h3 className="text-xl font-semibold text-gray-800">
           Remaining Allowances
         </h3>
 
-        {/* GRID OF 4 ITEMS */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
-          {/* CARD TEMPLATE (TRAVEL) */}
+         
           <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
             <p className="font-medium text-gray-700">Travel</p>
             <p className="text-3xl font-bold text-gray-900">{form.allowanceTravel}</p>
@@ -130,7 +130,7 @@ export default function PlanDetails({ plan }: { plan: any }) {
             </div>
           </div>
 
-          {/* BILLS CARD */}
+          
           <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
             <p className="font-medium text-gray-700">Bills</p>
             <p className="text-3xl font-bold text-gray-900">{form.allowanceBills}</p>
@@ -154,7 +154,7 @@ export default function PlanDetails({ plan }: { plan: any }) {
             </div>
           </div>
 
-          {/* GROCERY */}
+          
           <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
             <p className="font-medium text-gray-700">Grocery</p>
             <p className="text-3xl font-bold text-gray-900">{form.allowanceGrocery}</p>
@@ -178,7 +178,7 @@ export default function PlanDetails({ plan }: { plan: any }) {
             </div>
           </div>
 
-          {/* SHOPPING */}
+          
           <div className="bg-gray-50 p-5 rounded-2xl shadow-sm space-y-3">
             <p className="font-medium text-gray-700">Shopping</p>
             <p className="text-3xl font-bold text-gray-900">{form.allowanceShopping}</p>
@@ -203,7 +203,7 @@ export default function PlanDetails({ plan }: { plan: any }) {
           </div>
         </div>
 
-        {/* SAVE BUTTON */}
+        
         <button
           onClick={handleSave}
           className="w-full py-3 bg-gray-900 text-white text-lg font-semibold rounded-2xl shadow hover:bg-black"

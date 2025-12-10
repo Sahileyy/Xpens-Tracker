@@ -50,24 +50,24 @@ export default function LoginPage() {
 
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 border border-gray-200">
 
-        {/* LOGO */}
+       
         <div className="flex justify-center mb-4">
           <Image src={Xpenlogo} alt="logo" className="w-20 h-20 grayscale" />
         </div>
 
-        {/* TITLE */}
+       
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6 tracking-tight">
           xpens Tracker
         </h1>
 
-        {/* ERROR BOX */}
+        
         {error && (
           <div className="bg-gray-200 text-gray-700 p-3 rounded-lg mb-4 text-center border border-gray-300">
             {error}
           </div>
         )}
 
-        {/* FORM */}
+        
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="text-gray-700 font-semibold text-sm">Email</label>
@@ -91,7 +91,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* BUTTON */}
+          
           <button
             type="submit"
             disabled={loading}
@@ -101,7 +101,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* REGISTER LINK */}
+       
         <div className="mt-4 text-center">
           <p className="text-gray-600 text-sm">
             Don't have an account?{" "}
